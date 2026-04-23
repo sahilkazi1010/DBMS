@@ -1,0 +1,124 @@
+==================================================
+                STORED PROCEDURE
+==================================================
+
+--------------------------------------------------
+-- CREATE TABLE
+--------------------------------------------------
+
+CREATE TABLE student (
+    id INT,
+    name VARCHAR(20),
+    marks INT,
+    result VARCHAR(10)
+);
+
+--------------------------------------------------
+-- INSERT VALUES
+--------------------------------------------------
+
+INSERT INTO student VALUES
+(1, 'Nazif', 90, NULL),
+(2, 'Sahil', 30, NULL),
+(3, 'Saheem', 75, NULL);
+
+--------------------------------------------------
+-- VIEW TABLE
+--------------------------------------------------
+
+SELECT * FROM student;
+
+--------------------------------------------------
+-- CREATE PROCEDURE
+--------------------------------------------------
+
+DELIMITER $$
+
+CREATE PROCEDURE practical(IN m1 INT)
+BEGIN
+    DECLARE mymark INT;
+
+    SET mymark = m1;
+
+    IF mymark > 35 THEN
+        UPDATE student
+        SET result = 'pass'
+        WHERE marks = mymark;
+    ELSE
+        UPDATE student
+        SET result = 'fail'
+        WHERE marks = mymark;
+    END IF;
+END $$
+
+DELIMITER ;
+
+--------------------------------------------------
+-- EXECUTE PROCEDURE
+--------------------------------------------------
+
+CALL practical(30);
+
+CALL practical(90);
+
+CALL practical(75);
+
+--------------------------------------------------
+-- VIEW UPDATED TABLE
+--------------------------------------------------
+
+SELECT * FROM student;
+
+--------------------------------------------------
+-- DELETE PROCEDURE
+--------------------------------------------------
+
+DROP PROCEDURE practical;
+
+==================================================
+                    TRIGGER
+==================================================
+
+--------------------------------------------------
+-- VIEW EXISTING TABLE
+--------------------------------------------------
+
+SELECT * FROM student;
+
+--------------------------------------------------
+-- CREATE TRIGGER
+--------------------------------------------------
+
+DELIMITER $$
+
+CREATE TRIGGER t1
+BEFORE INSERT ON student
+FOR EACH ROW
+BEGIN
+    IF NEW.marks < 35 THEN
+        SET NEW.result = 'fail';
+    ELSE
+        SET NEW.result = 'pass';
+    END IF;
+END $$
+
+DELIMITER ;
+
+--------------------------------------------------
+-- INSERT NEW RECORD
+--------------------------------------------------
+
+INSERT INTO student VALUES
+(4, 'Umar', 25, NULL);
+
+--------------------------------------------------
+-- VIEW UPDATED TABLE
+--------------------------------------------------
+
+SELECT * FROM student;
+
+--------------------------------------------------
+-- DELETE TRIGGER
+--------------------------------------------------
+
+DROP TRIGGER t1;
