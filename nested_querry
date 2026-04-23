@@ -1,0 +1,84 @@
+--------------------------------------------------
+-- CREATE DATABASE
+--------------------------------------------------
+
+CREATE DATABASE college;
+
+USE college;
+
+--------------------------------------------------
+-- CREATE TABLE
+--------------------------------------------------
+
+CREATE TABLE student (
+    name VARCHAR(20),
+    marks INT
+);
+
+--------------------------------------------------
+-- INSERT VALUES
+--------------------------------------------------
+
+INSERT INTO student VALUES
+('Rahul', 85),
+('Aman', 70),
+('Priya', 90),
+('Sneha', 60),
+('Ramesh', 75);
+
+--------------------------------------------------
+-- VIEW TABLE
+--------------------------------------------------
+
+SELECT * FROM student;
+
+==================================================
+                NESTED QUERIES
+==================================================
+
+--------------------------------------------------
+-- 1. SUBQUERY USING WHERE CLAUSE
+-- Students having marks greater than average
+--------------------------------------------------
+
+SELECT name, marks
+FROM student
+WHERE marks > (
+    SELECT AVG(marks)
+    FROM student
+);
+
+--------------------------------------------------
+-- 2. SUBQUERY IN FROM CLAUSE
+--------------------------------------------------
+
+SELECT AVG(marks)
+FROM (
+    SELECT marks
+    FROM student
+    WHERE marks > 70
+) AS temp;
+
+--------------------------------------------------
+-- 3. CORRELATED SUBQUERY
+--------------------------------------------------
+
+SELECT s1.name, s1.marks
+FROM student s1
+WHERE s1.marks = (
+    SELECT MAX(s2.marks)
+    FROM student s2
+    WHERE s1.name = s2.name
+);
+
+--------------------------------------------------
+-- 4. NESTED QUERY USING NOT IN
+--------------------------------------------------
+
+SELECT name, marks
+FROM student
+WHERE marks NOT IN (
+    SELECT marks
+    FROM student
+    WHERE marks > 80
+);
