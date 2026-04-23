@@ -1,0 +1,41 @@
+-- CREATE DATABASE
+CREATE DATABASE college;
+
+-- USE DATABASE
+USE college;
+
+-- CREATE TABLE
+CREATE TABLE student (
+    id INT,
+    name VARCHAR(20),
+    age INT
+);
+
+-- INSERT RECORDS
+INSERT INTO student VALUES
+(1, 'Rahul', 20),
+(2, 'Aman', 21),
+(3, 'Priya', 19);
+
+-- SELECT ALL RECORDS
+SELECT * FROM student;
+SELECT NAME FROM student where id = 1;
+
+-- UPDATE RECORD
+UPDATE student
+SET age = 22
+WHERE id = 2;
+
+-- DELETE RECORD
+DELETE FROM student
+WHERE id = 3;
+DELETE FROM student;
+
+-- VIEW UPDATED TABLE
+SELECT * FROM student;
+
+-- TRUNCATE TABLE
+TRUNCATE TABLE student;
+
+-- DROP TABLE
+DROP TABLE student;
