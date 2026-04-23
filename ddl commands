@@ -1,0 +1,12 @@
+create table student(id int,name varchar(20),age int);
+ describe student;
+alter  table student add course varchar(20);
+describe student;
+ rename table student to students;
+describe students;
+insert into students values(1,"sahil",19,"data science");
+select * from students;
+truncate table students;
+select * from students;
+drop table students;
+describe students;
