@@ -1,0 +1,79 @@
+-- CREATE DATABASE
+CREATE DATABASE college;
+
+-- USE DATABASE
+USE college;
+
+-- CREATE TABLE
+CREATE TABLE student (
+    id INT,
+    name VARCHAR(20),
+    age INT
+);
+
+-- INSERT RECORDS
+INSERT INTO student VALUES
+(1, 'Rahul', 20),
+(2, 'Aman', 21),
+(3, 'Priya', 19),
+(4, 'Akash', 22),
+(5, 'Ramesh', 20);
+
+-- VIEW TABLE
+SELECT * FROM student;
+
+--------------------------------------------------
+-- PATTERN MATCHING USING %
+--------------------------------------------------
+
+-- Names starting with A
+SELECT * FROM student
+WHERE name LIKE 'A%';
+
+-- Names ending with a
+SELECT * FROM student
+WHERE name LIKE '%a';
+
+-- Names containing 'an'
+SELECT * FROM student
+WHERE name LIKE '%an%';
+
+--------------------------------------------------
+-- PATTERN MATCHING USING _
+--------------------------------------------------
+
+-- Names having exactly 4 letters
+SELECT * FROM student
+WHERE name LIKE '____';
+
+-- Names starting with A and having 5 letters
+SELECT * FROM student
+WHERE name LIKE 'A____';
+
+-- Names whose second letter is 'a'
+SELECT * FROM student
+WHERE name LIKE '_a%';
+
+--------------------------------------------------
+-- AGGREGATE FUNCTIONS
+--------------------------------------------------
+
+-- COUNT Function
+SELECT COUNT(*) AS Total_Students
+FROM student;
+
+-- MAX Function
+SELECT MAX(age) AS Maximum_Age
+FROM student;
+
+-- MIN Function
+SELECT MIN(age) AS Minimum_Age
+FROM student;
+
+-- AVG Function
+SELECT AVG(age) AS Average_Age
+FROM student;
+
+-- SUM Function
+SELECT SUM(age) AS Total_Age
+FROM student;
